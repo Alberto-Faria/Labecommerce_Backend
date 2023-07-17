@@ -47,8 +47,8 @@ app.get("/users", async (req: Request, res: Response) => {
 
 //GET All products
 app.get("/products", async (req: Request, res: Response) => {
-  try {
-    
+  try { 
+
     const result = await db("products")
 
     res.status(200).send({ products: result });
@@ -65,13 +65,14 @@ app.get("/products", async (req: Request, res: Response) => {
 
 //GET All purchase
 app.get("/purchases", async (req: Request, res: Response) => {
-  try {
-    
+  try { 
+
     const result = await db("purchases")
 
     res.status(200).send({purchases: result});
 
   } catch (error: any) {
+
     console.log(error);
 
     if (res.statusCode === 200) {
@@ -116,7 +117,7 @@ app.post("/users", async (req: Request, res: Response) => {
     if (id !== undefined) {
       if (typeof id !== "string") {
         res.status(400);
-        throw new Error("'id' inválido, deve ser uma string!");
+        throw new Error("'id' inválido, deve ser string!");
       }
     }
 
@@ -124,16 +125,10 @@ app.post("/users", async (req: Request, res: Response) => {
       if (users[i].id === id) {
         res.status(400);
         throw new Error(
-          "Este Id não está disponível para cadastro. Tente um novo Id."
+          "Id não disponível. Tente um novo Id."
         );
       }
     }
-    // const findId = users.find((user) => user.id === id);
-
-    // if (findId) {
-    //   res.status(400);
-    //   throw new Error("ID não disponível para cadastro.");
-    // }
 
     if (name !== undefined) {
       if (typeof name !== "string") {
@@ -146,13 +141,6 @@ app.post("/users", async (req: Request, res: Response) => {
       res.status(400);
       throw new Error("'Id' ou 'Name' devem ter no minímo 1 caractere.");
     }
-
-    // const findEmail = users.find((user) => user.email === email);
-
-    // if (findEmail) {
-    //   res.status(400);
-    //   throw new Error("Email não disponível para cadastro.");
-    // }
 
     for (let i = 0; i < users.length; i++) {
       if (users[i].email === email) {
