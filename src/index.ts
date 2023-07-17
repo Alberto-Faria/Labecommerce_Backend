@@ -282,7 +282,7 @@ app.post("/products", async (req: Request, res: Response) => {
   }
 });
 
-//POST Create Product
+//POST Create purchases
 app.post("/purchases", async (req: Request, res: Response) => {
   try {
     const { id, buyer, total_price, created_at, paid } = req.body as TPurchase;
@@ -363,7 +363,6 @@ app.post("/purchases", async (req: Request, res: Response) => {
   }
 });
 
-
 //busca compras por id
 app.get("/purchases/:id", async (req: Request, res: Response) => {
   try {
@@ -396,11 +395,10 @@ app.get("/purchases/:id", async (req: Request, res: Response) => {
       .innerJoin("products","products.id","=","purchases_products.product_id")
       const result = {...purchase, productsList:purchaseProducts}
       res.status(200).send({purchase: result});
-
       }  
 
     if (!purchase) {
-      res.status(400); // definimos um status code apropriado antes do disparo
+      res.status(400); 
       throw new Error("A compra não existe!");
     }
 
@@ -417,8 +415,6 @@ app.get("/purchases/:id", async (req: Request, res: Response) => {
 });
 
 
-
-
 //busca produtos por id
 app.get("/products/:id", async (req: Request, res: Response) => {
   try {
@@ -430,7 +426,7 @@ app.get("/products/:id", async (req: Request, res: Response) => {
     `);
 
     if (!product) {
-      res.status(400); // definimos um status code apropriado antes do disparo
+      res.status(400); 
       throw new Error("O produto não existe!");
     }
 
@@ -486,14 +482,10 @@ app.delete("/user/:id", (req: Request, res: Response) => {
       throw new Error("Usuário não encontrado");
     }
 
-    //encontrar o índice do item a ser removido
     const indexToRemove = users.findIndex((user) => user.id === id);
 
-    //só deletar caso o índicce seja válido (ou seja, encontrou o item)
     if (indexToRemove >= 0) {
-      //splice para editar diretamente o array accounts
-      //primeiro argumento é o índice alvo
-      //segundo argumento é quantos itens serão removidos a partir do alvo
+  
       users.splice(indexToRemove, 1);
     }
 
@@ -520,14 +512,11 @@ app.delete("/product/:id", (req: Request, res: Response) => {
       throw new Error("Produto não encontrado");
     }
 
-    //encontrar o índice do item a ser removido
     const indexToRemove = products.findIndex((product) => product.id === id);
 
-    //só deletar caso o índicce seja válido (ou seja, encontrou o item)
+   
     if (indexToRemove >= 0) {
-      //splice para editar diretamente o array accounts
-      //primeiro argumento é o índice alvo
-      //segundo argumento é quantos itens serão removidos a partir do alvo
+   
       products.splice(indexToRemove, 1);
     }
 
@@ -555,7 +544,6 @@ app.put("/user/:id", (req: Request, res: Response) => {
       throw new Error("Usuáio não encontrado.");
     }
 
-    // const newId = req.body.id as string | undefined;
     const newEmail = req.body.email as string | undefined;
     const newPassword = req.body.password as string | undefined;
 
@@ -565,12 +553,6 @@ app.put("/user/:id", (req: Request, res: Response) => {
       throw new Error("Este Email já existe. Tente novamente!");
     }
 
-    // const findNewId = users.find((user) => user.id === newId)
-    // if (newId && findNewId){
-    //   res.status(400);
-    //   throw new Error("Este ID já existe. Tente novamente!")
-    // }
-
     if (newPassword && newPassword.length < 6) {
       res.status(400);
       throw new Error(
@@ -578,7 +560,6 @@ app.put("/user/:id", (req: Request, res: Response) => {
       );
     }
 
-    // findUser.id = newId || findUser.id;
     findUser.email = newEmail || findUser.email;
     findUser.password = newPassword || findUser.password;
 
@@ -623,8 +604,7 @@ app.put("/product/:id", (req: Request, res: Response) => {
     findProduct.name = newName || findProduct.name;
     findProduct.price = newPrice || findProduct.price;
     findProduct.category = newCategory || findProduct.category;
-    // }
-
+    
     res.status(200).send("Atualização realizada com sucesso");
   } catch (error: any) {
     console.log(error);

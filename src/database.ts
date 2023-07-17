@@ -53,27 +53,10 @@ export const purchases: TPurchase[] = [
     }
 ];
 
-// export function CreateUser(id: string, email: string, password: string) {
-//     const newUser: TUser = {id, email, password}
-//     users.push(newUser)
-//     console.log("Usuário cadastrado com sucesso!");
-//   }
-  
   export function getAllUsers(users: TUser[]) : TUser[] {
     return users
   }
   
-  // export function createProduct(id: string, name:string, price: number, category: Category){
-  //   const newProduct : TProduct = {id, name, price, category}
-  //   products.push(newProduct)
-  //   console.log("Produto cadastrado com sucesso!");
-  // }
-  
-  // export function CreateProduct(id: string, name: string, price: number, category: Category) {
-  //   const newProduct : TProduct = {id, name, price, category}
-  //   products.push(newProduct)
-  //   console.log("Produto cadastrado com sucesso!"); 
-  // }
 
   export function getUserById(id: string) {
     const user = users.find((user) => user.id === id)
@@ -96,11 +79,6 @@ export const purchases: TPurchase[] = [
     })
   }
   
-  // export function createPurchase (userId: string, productId: string, quantity: number, totalPrice: number) {
-  //   const newPurchase : TPurchase = {userId, productId, quantity, totalPrice}
-  //   purchases.push(newPurchase)
-  //   console.log("Compra realizada com sucesso");
-  // }
   
   export function getAllPurchasesFromUserId (id: string) : TPurchase[] | undefined {
     return purchases.filter((purchase) => {

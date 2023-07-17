@@ -1,6 +1,5 @@
 -- Active: 1689364229435@@127.0.0.1@3306
 
-
 CREATE TABLE users (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
     name TEXT NOT NULL,
@@ -88,7 +87,7 @@ VALUES ("u005", "Caio", "caio@gmail.com", "123456");
 INSERT INTO products(id, name, price, description, category, image_url)
 VALUES ("p007", "Mouse Pad", 30, "Mouse Pad Professional Gaming, Havit, HV-MP830, 30x90 cm", "Informática", "https://m.media-amazon.com/images/I/51sIK8S+2-L._AC_.jpg");    
 
--- Get Products by IDENTIFIED
+-- Get Products by Id
 SELECT * FROM products
 WHERE id = "p001";
 
@@ -110,14 +109,14 @@ UPDATE products
 SET price = 50
 WHERE id = "p001";
 
--- Get All Users(refatorado)
+-- Get All Users
 SELECT * FROM users ORDER BY email ASC;
 
--- Get All Products(refatorado)
+-- Get All Products
 SELECT * FROM products ORDER BY price ASC
 LIMIT 20 OFFSET 1;
 
--- Get All Products(refatorado)
+-- Get All Products
 SELECT * FROM products 
 WHERE price >= 100 AND price <= 300
 ORDER BY price ASC;
